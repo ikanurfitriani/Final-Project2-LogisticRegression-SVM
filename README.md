@@ -5,4 +5,4 @@
 - Ika Nurfitriani
 - Muhammad Reesa R
 
-Link deployment: https://rain-predict-fp2-kel8.herokuapp.com/
+Link deployment FP2: https://rain-predict-fp2-kel8.herokuapp.com/
