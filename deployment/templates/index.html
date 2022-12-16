@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+        <title>Rain Prediction App in Australia</title>
+    </head>
+    <body class="flex flex-col justify-between item-center p-8 min-h-screen text-gray-800 md:flex-row"
+        style="background-image: url(static/img/bg1.jpg); ">
+        <main class="bg-white p-16 rounded-lg">
+            <h1 class="text-3xl font-bold mb-8">
+                Predict the Rain in Your Area:
+            </h1>
+
+            <form action="{{url_for('predict')}}" method="POST" class="flex flex-col">
+                <label for="inputMinTemp"><b>MinTemp</b>
+                <p><i>(Lowest temperature of the day)</i></p>
+                </label>
+				<input id="inputMinTemp" name="MinTemp" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In Celcius" min="-10" step="0.1" max="35" type="number" required>
+
+                <label for="inputRainfall"><b>Rainfall</b>
+                <p><i>(The amount of precipitation that day)</i></p>
+                </label>
+				<input id="inputRainfall" name="Rainfall" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In mm" min="0.0" step="0.1" max="1.5" type="number" required>
+
+                <label for="inputSunshine"><b>Sunshine</b>
+                <p><i>(The number of hours clear with sunlight that day)</i></p>
+                </label>
+				<input id="inputSunshine" name="Sunshine" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In Hours" min="0" step="0.1" max="24" type="number" required>
+
+                <label for="inputWindGustSpeed"><b>WindGustSpeed</b>
+                <p><i>(Highest wind speed for 24 hours before 12 at night that day)</i></p>
+                </label>
+				<input id="inputWindGustSpeed" name="WindGustSpeed" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In km/hour" min="0" max="70" type="number" required>
+
+                <label for="inputHumidity9am"><b>Humidity9am</b>
+                <p><i>(Humidity at 9 am that day)</i></p>
+                </label>
+				<input id="inputHumidity9am" name="Humidity9am" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In Percent" min="0" max="100" type="number" required>
+
+                <label for="inputHumidity3pm"><b>Humidity3pm</b>
+                <p><i>(Humidity at 3 pm that day)</i></p></label>
+				<input id="inputHumidity3pm" name="Humidity3pm" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In Percent" min="0" max="100" type="number" required>
+
+                <label for="inputPressure3pm"><b>Pressure3pm</b>
+                <p><i>(Air pressure at 3 pm that day in hpa)</i></p>
+                </label>
+				<input id="inputPressure3pm" name="Pressure3pm" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In hpa" min="990" step="0.1" max="1040" type="number" required>
+
+                <label for="inputCloud9am"><b>Cloud9am</b>
+                <p><i>(The percentage of the sky covered by clouds by 9 am that day)</i></p>
+                </label>
+				<input id="inputCloud9am" name="Cloud9am" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In percentage (0-9)" min="0" max="9" type="number" required>
+
+                <label for="inputCloud3pm"><b>Cloud3pm</b>
+                <p><i>(The percentage of the sky covered by clouds by 3 pm that day)</i></p>
+                </label>
+				<input id="inputCloud3pm" name="Cloud3pm" 
+				class="p-4 bg-gray-100 rounded-md" placeholder="In percentage (0-9)" min="0" max="9" type="number" required>
+
+                <label for="inputRainToday"><b>RainToday</b>
+                <p><i>(Is it raining today)</i></p>
+                </label>
+                <select id="inputRainToday" name="RainToday" class="p-4 bg-gray-100 rounded-md">
+					<option selected disabled>Choose...</option>
+					<option value="0">No</option>
+					<option value="1">Yes</option>
+				</select>
+
+                <label for="inputMonth"><b>Month</b>
+                <p><i>(Month on that day)</i></p>
+                </label>
+                <select id="inputMonth" name="month" class="p-4 bg-gray-100 rounded-md">
+					<option selected disabled>Choose...</option>
+					<option value="1">January</option>
+					<option value="2">February</option>
+					<option value="3">March</option>
+					<option value="4">April</option>
+					<option value="5">May</option>
+					<option value="6">June</option>
+					<option value="7">July</option>
+					<option value="8">August</option>
+					<option value="9">September</option>
+					<option value="10">October</option>
+					<option value="11">November</option>
+					<option value="12">December</option>
+				</select>
+
+                <label class="input-group-text" for="Location"><b>Location</b>
+                <p><i>(Name of a city in Australia)</i></p>
+                </label>
+				<select id="inputLocation" name="Location" class="p-4 bg-gray-100 rounded-md">
+					<option selected disabled>Choose...</option>
+					<option value="Adelaide">Adelaide </option>
+					<option value="Albany">Albany</option>
+					<option value="Albury">Albury</option>
+					<option value="AliceSprings">AliceSprings</option>
+					<option value="BadgerysCreek">BadgerysCreek</option>
+					<option value="Ballarat">Ballarat</option>
+					<option value="Bendigo">Bendigo</option>
+					<option value="Brisbane">Brisbane</option>
+					<option value="Cairns">Cairns</option>
+					<option value="Canberra">Canberra</option>
+					<option value="Cobar">Cobar</option>
+					<option value="Dartmoor">Dartmoor</option>
+					<option value="Darwin">Darwin</option>
+					<option value="GoldCoast">GoldCoast</option>
+					<option value="Hobart">Hobart</option>
+					<option value="Katherine">Katherine</option>
+					<option value="Launceston">Launceston</option>
+					<option value="Melbourne">Melbourne</option>
+					<option value="MelbourneAirport">MelbourneAirport</option>
+					<option value="Mildura">Mildura</option>
+					<option value="Moree">Moree</option>
+					<option value="MountGambier">MountGambier</option>
+					<option value="MountGinini">MountGinini</option>
+					<option value="Newcastle">Newcastle</option>
+					<option value="Nhil">Nhil</option>
+					<option value="NorahHead">NorahHead</option>
+					<option value="NorfolkIsland">NorfolkIsland</option>
+					<option value="Nuriootpa">Nuriootpa</option>
+					<option value="PearceRAAF">PearceRAAF</option>
+					<option value="Penrith">Penrith</option>
+					<option value="Perth">Perth</option>
+					<option value="PerthAirport">PerthAirport</option>
+					<option value="Portland">Portland</option>
+					<option value="Richmond">Richmond</option>
+					<option value="Sale">Sale</option>
+					<option value="SalmonGums">SalmonGums</option>
+					<option value="Townsville">Townsville </option>
+					<option value="Tuggeranong">Tuggeranong</option>
+					<option value="Uluru">Uluru</option>
+					<option value="WaggaWagga">WaggaWagga</option>
+					<option value="Walpole">Walpole</option>
+					<option value="Watsonia">Watsonia</option>
+					<option value="Williamtown">Williamtown</option>
+					<option value="Witchcliffe">Witchcliffe</option>
+					<option value="Wollongong">Wollongong</option>
+					<option value="Woomera">Woomera</option>
+				</select>
+
+                <button type="submit" class="flex justify-center align-center mt-8 p-4 bg-gradient-to-r
+                from-blue-400 to-yellow-500 text-white rounded-md">
+                    PREDICT NOW
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-arrow-right ml-4">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+        </main>
+        <section class="mt-8 h-full flex-auto rounded-lg md:mt-0 md:ml-8">
+            <div class="bg-white p-16 rounded-lg">
+                <h1 class="text-2xl mb-8">
+                    <b>Prediction Result:</b>
+                </h1>
+                <h2 class="text-5xl font-bold">
+                    {{prediction}}
+                </h2>
+                <div class="mt-8">
+                    <p><b>According To:</b></p>
+                    <p>MinTemp: {{MinTemp}}</p>
+                    <p>Rainfall: {{Rainfall}}</p>
+                    <p>Sunshine: {{Sunshine}}</p>
+                    <p>WindGustSpeed: {{WindGustSpeed}}</p>
+                    <p>Humidity: {{Humidity}}</p>
+                    <p>Pressure: {{Pressure3pm}}</p>
+                    <p>Cloud: {{Cloud}}</p>
+                </div>
+            </div>
+            <div class="bg-white p-16 rounded-lg mt-8">
+                <h1 class="text-2xl mb-8">
+                    <b>About Us:</b>
+                </h1>
+                <div class="mt-8">
+                    <p>Ervizal Buana J</p>
+                    <p>Ika Nurfitriani</p>
+                    <p>Muhammad Reesa R</p>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
