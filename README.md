@@ -1,6 +1,6 @@
 # Final-Project2-LogisticRegression-SVM
 ## Introduction
-**Kelompok 8**
+**KELOMPOK 8**
 <table>
     <tr>
       <td><b>Name</b></td>
